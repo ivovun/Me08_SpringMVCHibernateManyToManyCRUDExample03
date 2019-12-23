@@ -135,6 +135,7 @@ public class AppController {
 		model.addAttribute("user", user);
 		model.addAttribute("roles", userProfileService.findAll());
 		model.addAttribute("edit", true);
+
 		return "registration";
 	}
 	
@@ -146,11 +147,14 @@ public class AppController {
 //	public String updateUser(@Valid User user, BindingResult result,
 //							 ModelMap model, @PathVariable String ssoId) {
 	@PostMapping("admin/save")
-	public String save(@ModelAttribute("user") User user, BindingResult result) {
+	public String save(@ModelAttribute("user") User user, BindingResult result, ModelMap model) {
 
 		if (result.hasErrors()) {
 			return "registration";
 		}
+
+
+
 		userService.save(user);
 
 		return "redirect:/admin/list";
