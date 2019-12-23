@@ -97,36 +97,35 @@ public class AppController {
         return "registration";
     }
 
-    /**
-     * This method will be called on form submission, handling POST request for
-     * saving user in database. It also validates the user input
-     */
-    @RequestMapping(value = {"/admin/newuser"}, method = RequestMethod.POST)
-    public String saveUser(@Valid User user, BindingResult result,
-                           ModelMap model) {
-
-        if (result.hasErrors()) {
-            return "registration";
-        }
-
-        /*
-         * Preferred way to achieve uniqueness of field [sso] should be implementing custom @Unique annotation
-         * and applying it on field [sso] of Model class [User].
-         *
-         * Below mentioned peace of code [if block] is to demonstrate that you can fill custom errors outside the validation
-         * framework as well while still using internationalized messages.
-         *
-         */
-        if (!userService.isUserSSOUnique(user.getId(), user.getSsoId())) {
-            FieldError ssoError = new FieldError("user", "ssoId", messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
-            result.addError(ssoError);
-            return "registration";
-        }
-
-        userService.save(user);
-
-        return "redirect:/admin/list";
-    }
+//    /**
+//     * This method will be called on form submission, handling POST request for
+//     * saving user in database. It also validates the user input
+//     */
+//    @RequestMapping(value = {"/admin/newuser"}, method = RequestMethod.POST)
+//    public String saveUser(@Valid User user, BindingResult result) {
+//
+//        if (result.hasErrors()) {
+//            return "registration";
+//        }
+//
+//        /*
+//         * Preferred way to achieve uniqueness of field [sso] should be implementing custom @Unique annotation
+//         * and applying it on field [sso] of Model class [User].
+//         *
+//         * Below mentioned peace of code [if block] is to demonstrate that you can fill custom errors outside the validation
+//         * framework as well while still using internationalized messages.
+//         *
+//         */
+//        if (!userService.isUserSSOUnique(user.getId(), user.getSsoId())) {
+//            FieldError ssoError = new FieldError("user", "ssoId", messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
+//            result.addError(ssoError);
+//            return "registration";
+//        }
+//
+//        userService.save(user);
+//
+//        return "redirect:/admin/list";
+//    }
 
     /**
      * This method will provide the medium to update an existing user.
@@ -148,13 +147,26 @@ public class AppController {
 //	@RequestMapping(value = { "/admin/edit-user-{ssoId}" }, method = RequestMethod.POST)
 //	public String updateUser(@Valid User user, BindingResult result,
 //							 ModelMap model, @PathVariable String ssoId) {
-    @PostMapping("admin/save")
+    @PostMapping("/admin/save")
     public String save(@ModelAttribute("user") User user, BindingResult result, ModelMap model) {
 
         if (result.hasErrors()) {
             return "registration";
         }
 
+        /*
+         * Preferred way to achieve uniqueness of field [sso] should be implementing custom @Unique annotation
+         * and applying it on field [sso] of Model class [User].
+         *
+         * Below mentioned peace of code [if block] is to demonstrate that you can fill custom errors outside the validation
+         * framework as well while still using internationalized messages.
+         *
+         */
+        if (!userService.isUserSSOUnique(user.getId(), user.getSsoId())) {
+            FieldError ssoError = new FieldError("user", "ssoId", messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
+            result.addError(ssoError);
+            return "registration";
+        }
 
         userService.save(user);
 

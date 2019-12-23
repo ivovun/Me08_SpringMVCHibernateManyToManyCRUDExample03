@@ -1,5 +1,8 @@
 package com.websystique.springmvc.model;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
@@ -144,13 +147,12 @@ public class User implements UserDetails {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		User user = (User) o;
-		return id.equals(user.id) &&
-				ssoId.equals(user.ssoId);
+		return ssoId.equals(user.ssoId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, ssoId);
+		return Objects.hash(ssoId);
 	}
 
 	/*
