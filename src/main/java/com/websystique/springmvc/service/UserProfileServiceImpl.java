@@ -13,10 +13,7 @@ import com.websystique.springmvc.model.UserProfile;
 @Service("userProfileService")
 @Transactional
 public class UserProfileServiceImpl implements UserProfileService{
-
-
 	UserProfileRepository userProfileRepository;
-
 
 	@Autowired
 	public UserProfileServiceImpl(UserProfileRepository userProfileRepository) {

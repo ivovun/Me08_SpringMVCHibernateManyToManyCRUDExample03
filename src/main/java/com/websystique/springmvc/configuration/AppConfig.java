@@ -28,23 +28,6 @@ public class AppConfig implements WebMvcConfigurer {
 	public AppConfig(RoleToUserProfileConverter roleToUserProfileConverter) {
 	    this.roleToUserProfileConverter = roleToUserProfileConverter;
     }
-
-	@Bean
-	public InternalResourceViewResolver resolver() {
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setViewClass(JstlView.class);
-		resolver.setPrefix("/WEB-INF/views/");
-		resolver.setSuffix(".jsp");
-		return resolver;
-	}
-
-	/**
-     * Configure ResourceHandlers to serve static resources like CSS/ Javascript etc...
-     */
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
-    }
     
     /**
      * Configure Converter to be used.
