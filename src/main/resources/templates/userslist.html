@@ -16,21 +16,29 @@
 <body>
 
 <div class="container">
-	<div th:if="${admin_fragment_body}" >
-		<div th:replace="/admin_body :: admin_fragment"> </div>
-	</div>
-	<div th:if="${!admin_fragment_body}" >
-		<div th:replace="/admin_body :: admin_fragment"> </div>
-	</div>
+    <div th:if="${admin_fragment_body}">
+        <div th:replace="/user_body :: admin_fragment"></div>
+    </div>
+    <div th:if="${!admin_fragment_body}">
+        <div th:replace="/user_body :: user_fragment"></div>
+    </div>
 
 	<!-- Add a logout button -->
-	<form th:action="@{/logout}"
-		  method="POST">
+<!--        <br>-->
+<!--        <br>-->
+<!--        <a th:if="${admin_fragment_body}" th:href="@{/logout}"-->
+<!--           class="btn btn-primary btn-sm mb-3">-->
+<!--            Logout-->
+<!--        </a>-->
+<!--    -->
+<!--    <div th:if="${!admin_fragment_body}" class="container">-->
+<!--        <a  th:href="@{/logout}"-->
+<!--           class="btn btn-primary btn-sm mb-3">-->
+<!--            Logout-->
+<!--        </a>-->
+<!--    </div>-->
 
-		<input type="submit" value="Logout"/>
-
-	</form>
- </div>
+</div>
 
 </body>
 </html>

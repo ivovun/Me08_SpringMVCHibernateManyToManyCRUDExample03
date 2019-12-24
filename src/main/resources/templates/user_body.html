@@ -1,13 +1,11 @@
 <div th:fragment="admin_fragment">
     <h3>Employee Directory</h3>
     <hr>
-
     <!-- Add a button -->
     <a th:href="@{/admin/showFormForAdd}"
        class="btn btn-primary btn-sm mb-3">
         Add Employee
     </a>
-
 
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
@@ -45,6 +43,30 @@
         </tr>
         </tbody>
     </table>
+
+    <a  th:href="@{/logout}"
+       class="btn btn-primary btn-sm mb-3">Logout
+    </a>
+</div>
+
+
+<h3 th:fragment="user_fragment">
+
+    <h3 th:text="'Hello, ' + ${loggedinuser}">Employee Directory</h3>
+    <hr>
+
+    <span class="well floatCenter">
+			Go to <a href="/admin/list">Users List</a>
+	</span>
+    <div>
+        <br>
+        <br>
+
+        <a  th:href="@{/logout}"
+            class="btn btn-primary btn-sm mb-3">
+            Logout
+        </a>
+    </div>
 
 
 </div>

@@ -20,6 +20,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,18 +32,23 @@ public class User implements UserDetails {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank(message = "Name is mandatory")
 	@Column(name="SSO_ID", unique=true, nullable=false)
 	private String ssoId;
-	
+
+	@NotBlank(message = "PASSWORD is mandatory")
 	@Column(name="PASSWORD", nullable=false)
 	private String password;
-		
+
+	@NotBlank(message = "FIRST_NAME is mandatory")
 	@Column(name="FIRST_NAME", nullable=false)
 	private String firstName;
 
+	@NotBlank(message = "LAST_NAME is mandatory")
 	@Column(name="LAST_NAME", nullable=false)
 	private String lastName;
 
+	@NotBlank(message = "EMAIL is mandatory")
 	@Column(name="EMAIL", nullable=false)
 	private String email;
 

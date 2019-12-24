@@ -39,7 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 				.antMatchers("/user").hasAnyRole("ADMIN", "USER", "DBA")
-				.antMatchers("/admin/list","/admin/newuser/**","/admin/delete-user-*","/admin/edit-user-*").hasRole("ADMIN")
+				.antMatchers("/admin/**").hasRole("ADMIN")
 				.and().formLogin().loginPage("/login").loginProcessingUrl("/login").usernameParameter("ssoId").passwordParameter("password")
 				.successHandler(authenticationSuccessHandler)
 				.and().csrf().and().exceptionHandling().accessDeniedPage("/Access_Denied");
